@@ -22,7 +22,6 @@
 num = input('1. Введите число: ')
 digs = list(filter(lambda x: x.isdigit(), num))
 res = digs[0]
-# ints = list(i+res for i in range(len(digs), map(int, digs)))
 ints = sum(map(int, digs))
 print('Сумма цифр в числе', num, '=', ints)
 
