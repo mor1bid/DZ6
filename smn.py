@@ -59,7 +59,8 @@ def summa(res):
             res += stripe[i]
     return res
 stripe = [digs(i) for i in range(1, 11)]
-print('2.', stripe)
+sprint = list((x,'|',i) for x,i in enumerate(stripe))
+print('2.', sprint)
 print('Сумма элементов на нечётных позициях в данном списке =', summa(res))
 
 # Семинар №3
@@ -125,7 +126,6 @@ def vide(dig, num):
         return dig, num
     else:
         dig += 1
-    # if num % dig == 0 and dig != num and dig == 2 or num % dig == 0 and dig % 2 == 0 and dig == 3 or num % dig == 0 and dig % 3==0:
     if num % dig == 0:
         return dig == 2
 multi = list(filter(lambda x: x != None, list(vide(dig, num) for dig in range(2, num) if dig <= num)))
