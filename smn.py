@@ -47,40 +47,82 @@ print('Сумма цифр в числе', num, '=', ints)
 
 # Новая версия:
 
+from functools import reduce
 import random
 def digs(num):
     num = random.randint(0,10)
     return num
 stripe = [digs(i) for i in range(1, 11)]
 print('2.', stripe)
-res = list(map(int, (i for i in range(len(stripe)) if i%2!=0)))
-# for i in range(len(stripe)):
-#     if i%2!=0:
-#         res+=stripe[i]
-# print('Сумма элементов на нечётных позициях в данном списке =', res)
-print(res)
+res = reduce(lambda h,l: h+l, stripe)
+print('Сумма элементов на нечётных позициях в данном списке =', res)
 
 # Семинар №3
-# Задание 2 Напишите программу, которая найдёт 
-# произведение пар чисел списка. Парой считаем 
-# первый и последний элемент, второй и предпоследний и т.д.
+# Задание 3 Задайте список из вещественных чисел. 
+# Напишите программу, которая найдёт разницу между максимальным и 
+# минимальным значением дробной части элементов.
 
 # Старая версия:
 
-# i2 = 0
-# ar = []
-# print('2. Произведение пар элементов в данном списке =', end=' ')
+# import random
+# strip = []
 # for i in range(si):
-#     if i<si/2:
-#         i2-=1
-#         res= ray[i]*ray[i2]
-#         ar.append(res)
-# print(ar)
+#     num = round(random.uniform(-10.1, 10.1), 2)
+#     strip.append(num)
+# big = strip[0]
+# tin = strip[0]
+# print('3.', strip, '\n' 'Разность между максимальным и минимальным значениями данного списка =', end=' ')
+# for i in strip:
+#     if i%1>=big%1:
+#         big=i
+#     elif i%1<=tin%1 and i%1!=0:
+#         tin=i
+# print(big, '-', tin, '=', round((big%1)-(tin%1), 2))
 
 # Новая версия
 
-print('3. Произведение пар элементов в данном списке =', end=' ')
-res1 = [x for x in res(int(len(res)/2))]
-res2 = [x for x in range(int(len(res)/2), len(res))]
-print(res1)
-print(res2)
+def digs(num):
+    num = round(random.uniform(-10,10), 2)
+    return num
+res = list(digs(i) for i in range(0, 11))
+print('3.', res)
+res = list(map(lambda i: i % 1, res))
+def mima(res):
+    return round(max(res) - min(res), 2)
+print(round(max(res), 2), '-', round(min(res), 2), '=', mima(res))
+
+# Семинар №4
+# Задание 2 Задайте натуральное число N. 
+# Напишите программу, которая составит список простых множителей числа N.
+
+# Старая версия:
+
+# num = int(input("2. Введите число: "))
+# multi = []
+# i = 2
+# while i <= num:
+#     if num % i == 0:
+#         num /= i
+#         multi.append(i)
+#         i = 2
+#     else:
+#         i += 1
+# print('множители данного числа:', multi)
+
+# Новая версия
+
+dig = 2
+num = int(input("4. Введите число: "))
+def vide(dig, num):
+    if num % dig == 0:
+        num = round(num / dig)
+        dig = 2
+    else:
+        dig += 1
+    if num % dig == 0:
+        return dig, num
+    else:
+        return dig == '', num == ''
+multi = list(vide(dig, num) for dig in range(2, num) if dig<=num)
+# multi = list(filter(lambda x: None not in x, multi))
+print(multi)
