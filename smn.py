@@ -22,7 +22,6 @@
 num = input('1. Введите число: ')
 digs = list(filter(lambda x: x.isdigit(), num))
 ints = sum(map(int, digs))
-res = 0
 print('Сумма цифр в числе', num, '=', ints)
 
 # Семинар №3
@@ -47,15 +46,19 @@ print('Сумма цифр в числе', num, '=', ints)
 
 # Новая версия:
 
-from functools import reduce
 import random
+res = 0
 def digs(num):
     num = random.randint(0,10)
     return num
+def summa(res):    
+    for i in range(len(stripe)):
+        if i%2!=0:
+            res += stripe[i]
+    return res
 stripe = [digs(i) for i in range(1, 11)]
 print('2.', stripe)
-res = reduce(lambda h,l: h+l, stripe)
-print('Сумма элементов на нечётных позициях в данном списке =', res)
+print('Сумма элементов на нечётных позициях в данном списке =', summa(res))
 
 # Семинар №3
 # Задание 3 Задайте список из вещественных чисел. 
@@ -64,22 +67,23 @@ print('Сумма элементов на нечётных позициях в �
 
 # Старая версия:
 
-# import random
-# strip = []
-# for i in range(si):
-#     num = round(random.uniform(-10.1, 10.1), 2)
-#     strip.append(num)
-# big = strip[0]
-# tin = strip[0]
-# print('3.', strip, '\n' 'Разность между максимальным и минимальным значениями данного списка =', end=' ')
-# for i in strip:
-#     if i%1>=big%1:
-#         big=i
-#     elif i%1<=tin%1 and i%1!=0:
-#         tin=i
-# print(big, '-', tin, '=', round((big%1)-(tin%1), 2))
+import random
+si = int(input('3.o Задайте длину списка: '))
+strip = []
+for i in range(si):
+    num = round(random.uniform(-10.1, 10.1), 2)
+    strip.append(num)
+big = strip[0]
+tin = strip[0]
+print('3.', strip, '\n' 'Разность между максимальным и минимальным значениями данного списка =', end=' ')
+for i in strip:
+    if i%1>=big%1:
+        big=i
+    elif i%1<=tin%1 and i%1!=0:
+        tin=i
+print(big,round(big%1, 2), '-', tin,round(tin%1, 2), '=', round((big%1)-(tin%1), 2))
 
-# Новая версия
+# Новая версия:
 
 def digs(num):
     num = round(random.uniform(-10,10), 2)
@@ -109,7 +113,7 @@ print(round(max(res), 2), '-', round(min(res), 2), '=', mima(res))
 #         i += 1
 # print('множители данного числа:', multi)
 
-# Новая версия
+# Новая версия:
 
 dig = 2
 num = int(input("4. Введите число: "))
