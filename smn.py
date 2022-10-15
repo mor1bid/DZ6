@@ -21,6 +21,8 @@
 
 num = input('1. Введите число: ')
 digs = list(filter(lambda x: x.isdigit(), num))
+res = digs[0]
+# ints = list(i+res for i in range(len(digs), map(int, digs)))
 ints = sum(map(int, digs))
 print('Сумма цифр в числе', num, '=', ints)
 
@@ -67,21 +69,21 @@ print('Сумма элементов на нечётных позициях в �
 
 # Старая версия:
 
-import random
-si = int(input('3.o Задайте длину списка: '))
-strip = []
-for i in range(si):
-    num = round(random.uniform(-10.1, 10.1), 2)
-    strip.append(num)
-big = strip[0]
-tin = strip[0]
-print('3.', strip, '\n' 'Разность между максимальным и минимальным значениями данного списка =', end=' ')
-for i in strip:
-    if i%1>=big%1:
-        big=i
-    elif i%1<=tin%1 and i%1!=0:
-        tin=i
-print(big,round(big%1, 2), '-', tin,round(tin%1, 2), '=', round((big%1)-(tin%1), 2))
+# import random
+# si = int(input('3.o Задайте длину списка: '))
+# strip = []
+# for i in range(si):
+#     num = round(random.uniform(-10.1, 10.1), 2)
+#     strip.append(num)
+# big = strip[0]
+# tin = strip[0]
+# print('3.', strip, '\n' 'Разность между максимальным и минимальным значениями данного списка =', end=' ')
+# for i in strip:
+#     if i - int(i) >= big - int(big):
+#         big = i
+#     elif i - int(i) <= tin - int(tin) and i - int(i) != 0:
+#         tin = i
+# print(big - int(big), '-', tin - int(tin), '=', (big - int(big)) - (tin - int(tin)))
 
 # Новая версия:
 
@@ -90,10 +92,10 @@ def digs(num):
     return num
 res = list(digs(i) for i in range(0, 11))
 print('3.', res)
-res = list(map(lambda i: i % 1, res))
-def mima(res):
-    return round(max(res) - min(res), 2)
-print(round(max(res), 2), '-', round(min(res), 2), '=', mima(res))
+res2 = list(map(lambda i: round(i - int(i), 2), res))
+def mima(res2):
+    return max(res2) - min(res2)
+print(max(res2), '-', min(res2), '=', round(mima(res2), 2))
 
 # Семинар №4
 # Задание 2 Задайте натуральное число N. 
@@ -101,7 +103,7 @@ print(round(max(res), 2), '-', round(min(res), 2), '=', mima(res))
 
 # Старая версия:
 
-# num = int(input("2. Введите число: "))
+# num = int(input("2.o Введите число: "))
 # multi = []
 # i = 2
 # while i <= num:
@@ -118,15 +120,13 @@ print(round(max(res), 2), '-', round(min(res), 2), '=', mima(res))
 dig = 2
 num = int(input("4. Введите число: "))
 def vide(dig, num):
-    if num % dig == 0:
+    if num % dig == 0 and dig!=num:
         num = round(num / dig)
-        dig = 2
-    else:
-        dig += 1
-    if num % dig == 0:
         return dig, num
     else:
-        return dig == '', num == ''
-multi = list(vide(dig, num) for dig in range(2, num) if dig<=num)
-# multi = list(filter(lambda x: None not in x, multi))
+        dig += 1
+    # if num % dig == 0 and dig != num and dig == 2 or num % dig == 0 and dig % 2 == 0 and dig == 3 or num % dig == 0 and dig % 3==0:
+    if num % dig == 0:
+        return dig == 2
+multi = list(filter(lambda x: x != None, list(vide(dig, num) for dig in range(2, num) if dig <= num)))
 print(multi)
